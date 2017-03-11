@@ -1,13 +1,13 @@
 # Okta
 
-## [Identity and Access Management as a Service](/solutions/idaas)
+## [Identity and Access Management as a Service](/solutions/idaas.md)
 compliance: https://www.okta.com/security/
 price: https://www.okta.com/pricing/#product-it
 
-## [Authentication Service](#solutions/auth)
+## [Authentication Service](/solutions/auth.md)
 compliance: https://www.okta.com/security/
 price: https://www.okta.com/request-a-quote/ (starts with )
 
-## [API Management Service](#solutions/api)
+## [API Management Service](/solutions/api.md)
 compliance: (recently acquired stormpath)
 price: (missing pricing page)
