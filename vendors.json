@@ -1,0 +1,39 @@
+{
+    "vendor" : "okta",
+    "country" : "us",
+    "suite" : "Okta IT Products",
+    "details" : "https://www.okta.com/products/it/",
+    "login" : "https://www.okta.com/login/",
+    "products" : ["Single Sign-On", "Mobility Management", "Adaptive Multi-Factor Authentication", "Lifecycle Management", "Universal Directory"],
+    "customers" : ["smb", "enterprise"],
+    "security" : ["soc2_type2", "csa_star_level2", "iso_27001_2013", "iso_27018_2014", "hipaa", "fedramp_ato", "bug_bounty", "penetration_tests"],
+    "directory" : [ "users", "groups", "devices", "sso", "mfa", "provisioning"],
+    "mac" : ["email_config", "wifi_config", "vpn_config", "device_lock", "app_wipe", "device_wipe", "password_enforcement", "software_inventory", "encryption_status", "device_inventory"],
+    "ios" : ["password_enforcement", "password_reset", "email_config","wifi_config", "vpn_config", "app_config", "encryption_enforcement", "device_lock", "data_wipe", "device_wipe", "root_detection"],
+    "android" : ["password_enforcement", "password_reset", "email_config", "wifi_config", "vpn_config", "encryption_enforcement", "device_lock", "data_wipe", "software_config", "root_detection"],
+    "reviews" : ["gartner", "forrester"],
+    "tests": []
+},
+{
+    "vendor" : "sophos",
+    "vendor_country" : "uk",
+    "suite_name": "Sophos Central",
+    "suite_details_url" : "https://www.sophos.com/en-us/products/sophos-central.aspx",
+    "suite_login_url" : "https://central.sophos.com",
+    "product_names" : ["Intercept X", "Endpoint Protection", "Web Gateway", "Mobile", "Server Security", "Secure Wi-Fi", "Safeguard Encryption", "Email"],
+    "suite_customers" : ["smb","enterprise"],
+    "features" : ["mobile_inventory", "laptop_protection", "mobile_protection", "server_protection", "web_gateway", "encryption", "wifi", "email_gateway", "mobile_management"],
+    "reviews" : ["gartner", "forrester"],
+    "tests": ["av_test", "av_comparatives", "se_labs"]
+},
+{
+    "vendor": "kaspersky",
+    "vendor_country": "russia",
+    "suite_name": "Kaspersky Endpoint Security Cloud",
+    "sute_details_url" : "http://usa.kaspersky.com/business-security/cloud",
+    "suite_login_url" : "https://account.kaspersky.com",
+    "product_names": "Cloud",
+    "suite_customers" : ["smb"],
+    "osx_features": ["mobile_inventory", "laptop_inventory", "mobile_protection", "server_protection", "mobile_management"]
+    
+}
