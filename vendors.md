@@ -35,9 +35,8 @@ docker exec -d security-101 vendors query < query.json
 | criteria | description |
 |----------|-------------|
 |vendor.name |  The name of the company producing the security tool/serivce |
-
-vendor.headquarters # The country in which the company is listed. This is important when you want to exclude/include seucurity tools from countries that have specific regulations.
-suite.name # The marketing name for the suite of tools that ussually have (or will have) a consolidated management console.
+|vendor.headquarters | The country in which the company is listed. This is important when you want to exclude/include seucurity tools from countries that have specific regulations.|
+| suite.name | The marketing name for the suite of tools that ussually have (or will have) a consolidated management console.|
 
 virustotal_malware - endpoint protection vendors registered with virustotal enjoy a stream of the latest malware.
 virustotal_unsafe_websites - endpoint protection vendors registered with virustotal enjoy a stream of the latest urls
