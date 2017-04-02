@@ -32,11 +32,22 @@ docker exec -d security-101 vendors query < query.json
 ```
 
 ## Security Catalog criteria ##
-| criteria | description |
-|----------|-------------|
-|vendor.name |  The name of the company producing the security tool/serivce |
-|vendor.headquarters | The country in which the company is listed. This is important when you want to exclude/include seucurity tools from countries that have specific regulations.|
-| suite.name | The marketing name for the suite of tools that ussually have (or will have) a consolidated management console.|
+| criteria | description | evidence |
+|----------|-------------|----------|
+|vendor.name |  The name of the company producing the security tool/serivce | vendor website |
+|vendor.headquarters | The country in which the company is listed. This is important when you want to exclude/include seucurity tools from countries that have specific regulations.| vendor website |
+| suite.name | The marketing name for the suite of tools that ussually have (or will have) a consolidated management console.| vendor website |
+| suite.landing_page | URL which provides more information about the product suite | vendor website|
+| suite.login_page | URL of the SaaS product suite | vendor website |
+| suite.security.soc2_type2 | True if the SaaS achieved SOC2 Type2 compliance| vendor website |
+| suite.security.csa_star_level2 | True if the SaaS recieved CSA Star attestation| vendor website |
+| suite.security.iso_27001_2013 | True if the SaaS achieved ISO 27001 2013 certification| vendor website |
+| suite.security.iso_27018_2014 | True if the SaaS achieved ISO 27018 2014 certification| vendor website|
+| suite.security.hippa | True if the SaaS achieved HIPPA compliance| vendor website |
+| suite.security.fedramp_ato | True if the SaaS achieved FedRAMP compliance and Auhtority to Operate| vendor website|
+| suite.security.pen_tests | True if the SaaS is continously going through penetration tests | vendor website |
+| suite.security.bug_bounty | True if the SaaS has a public bug bounty program | vendor website |
+
 
 virustotal_malware - endpoint protection vendors registered with virustotal enjoy a stream of the latest malware.
 virustotal_unsafe_websites - endpoint protection vendors registered with virustotal enjoy a stream of the latest urls
