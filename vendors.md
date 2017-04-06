@@ -1,4 +1,4 @@
-Startups also can't efford engaging with multiple security vendors. This vendor narrowing tool should help you with preparing a shortlist by entering your specific startup requirements, and getting a list of vendors and product names. We also provide sample requirements to get you started.
+Startups find it hard to engage multiple security vendors. This vendor narrowing tool should help you with preparing a shortlist by entering your specific startup security requirements checklist, and getting a list of vendors and product names. We also provide sample requirements to get you started.
 
 ## Disclaimers ##
 * This tool should be used for narrowing down a selection of security vendors (vendor shortlist) and should not be solely used for making a purchase decision. The information is provided as-is and we cannot take responsibility for your security tools choices.  You would still need to contact the vendor, verify claims, read reviews and ask for a POC, before making a purchasing decision. 
@@ -10,7 +10,7 @@ Startups also can't efford engaging with multiple security vendors. This vendor 
 * Security systems, just like your systems, requires integration, continous monitoring and upgrades. If you choose a tool that is too complex for your startup, you would be wasting time and money. This is why you should first read the "Security 101 for SaaS startups guide". 
 * This is also why this catalog focuses solely on SaaS (hosted) solutions, since they were built from the ground up with usability in mind. The flip side of relying on a hosted security solution is that if such a SaaS is compromized, many companies including yours might suffer collateral damage. Therefore, we focus on vendors that have soc-2 certification or are in the process of obtaining such certification.
 * Even if you do find a security tool that is perfect for your organization, it would still be used by imperfect humans. Therfore we focus on tools that have identity baked into them. The minimum is users,roles/groups and devices. Hopefully it also provides role based policies (e.g. finance and management must have X feautre enabled on their laptop and mobile phones). At the end of the day, for most alerts you would contact the employee and walk them through whatever they did wrong (e.g. please don't browse website X using this laptop, ok?).
-* The most important security tool is upgrading to the latest version of Windows or MacOS, and installing the latest security updates. If you're not doing even that, stop reading now, fix this, and come back when you're done. 
+* The most important security tool is upgrading to the latest version of Windows or macOS, and installing the latest security updates. If you're not doing even that, stop reading now, fix this, and come back when you're done. 
 * Ubuntu Desktop is a great operating system too, but it's not covered here. The reason is that most security vendors make a living by selling to enterprise customers, and they rarly use Ubuntu Desktop, so the vendor selection is very limited.
 
 ## Prerequisites ##
@@ -22,41 +22,34 @@ docker run --name security-101 forter/security-101
 ## Basic Usage ##
 We provide a sample of security requirements yaml files that include "must", "want", "nice", "exclude" requirement levels. 
 
-The following requirement is for an Identity and Access Management services that provides Single Sign-On with Multi-Factor Authentication and exposes radius API or provides a radius gateway. Results are sorted by score, and Suites that also support yubikey, and suites that achieved CSA Star attestation will have higher score and will appear higher. The requirement also states the need for an Endpoint Protection Platform for windows that has maximum usability score (no pop-ups, false positives), very good protection score. It gives higher score for suites that ahieved maximum performance and protection score, and are soc2_type2 compliant. It excludes the suite named 'terrible anti-virus'.
-
-```
-iam:
-  must:
-  - suite.security.soc2_type2
-  - suite.iam.features.sso
-  - suite.iam.features.mfa.otp
-  - suite.iam.features: [radius, radius_gateway]
-  want:
-  - suite.iam.features.mfa.yubikey
-  nice:
-  - suite.security.csa_star_level2
-
-epp:
-- must:
-  - suite.epp.features.windows.avtest.protection: 5
-  - suite.epp.features.windows.avtest.usability: 6
-- want:
-  - suite.security.soc2_type2
-  - suite.epp.features.windows.avtest.protection: 6
-  - suite.epp.features.windows.avtest.performance: 6
-- exclude:
-  - suite.name : 'terrible anti-virus'
+The first requirement is for an Identity and Access Management services that provides Single Sign-On with Multi-Factor Authentication and exposes radius API or provides a radius gateway. Services that achieved soc2 type2 certification, between them suites that support yubikey mfa will appear first.
+The second requirement is for Windows Endpoint Protection Platform that passed avtest real world tests. Suites that achieved top avtest file sample scores and achieved soc2 certification will appear on top. Finally it excludes the suite named "terrible anti-virus".
 ```
 
-`docker exec -d security-101 vendors filter < requirements.yaml`
+- iam:
+    and_must:
+    - suite.iam.features.sso
+    - suite.iam.features.mfa.otp
+    - suite.iam.features: 
+        or:
+        - radius
+        - radius_gateway
+    and_want:
+    - suite.security.soc2_type2
+    and_nice:
+    - suite.iam.features.mfa.yubikey
+- epp:
+    and_must:
+    - suite.epp.tests.windows.avtest.realworld: 3
+    and_want:
+    - suite.epp.tests.windows.avtest.files : 3
+    - suite.security.soc2_type2
+    and_exclude:
+    - suite.name : 'terrible anti-virus'
+```
 
-## Advanced Usage ##
-You can use elasticsearch query syntax for more advanced queries
-```
-docker exec -d security-101 vendors querygen < requirements.yaml > query.json
-<manually edit query.json>
-docker exec -d security-101 vendors query < query.json
-```
+`./vendors.py filter -r requirements.yaml`
+
 
 ## Security Catalog criteria ##
 | criteria | description | evidence |
@@ -89,13 +82,29 @@ docker exec -d security-101 vendors query < query.json
 | suite.iam.features.mfa_push | Supports Multi Factor Authentication via a mobile app with push notifications |vendor docs|
 | suite.iam.features.mfa_yubikey | Supports Multi Factor Authentication via YubiKey |vendor docs|
 | suite.iam.features.browser_plugin | Supports automatic login even to strange websites that require a browser plugin |vendor docs|
-| suite.iam.features.radius_gateway | Provides a self-hosted radius gateway that exposes the radius protocol ||
-| suite.iam.features.radius | Exposes radius protocol ||
-| suite.iam.features.ldap_sync | Provides a self-hosted synchornization tool between the hosted directory and ldap (active directory, AWS Simple AD, etc...) ||
-| suite.epp | Endpoint Protection Platform (antivirus, personal firewall, device control, ...) |
-| suite.epp.features.windows.avtest.performance | performance impact score between 0 to 6 | https:////www.av-test.org/en/antivirus/business-windows-client/windows-10/ |
-| suite.epp.features.windows.avtest.protection | protection score between 0 to 6 | https:////www.av-test.org/en/antivirus/business-windows-client/windows-10/ |
-| suite.epp.features.windows.avtest.usability | usability score between 0 to 6 | https:////www.av-test.org/en/antivirus/business-windows-client/windows-10/ |
+| suite.iam.features.radius_gateway | Provides a self-hosted radius gateway that exposes the radius protocol |vendor docs|
+| suite.iam.features.radius | Exposes radius protocol |vendor docs|
+| suite.iam.features.ldap_sync | Provides a self-hosted synchornization tool between the hosted directory and ldap (active directory, AWS Simple AD, etc...) |vendor docs|
+| suite.epp | Endpoint Protection Platform (antivirus, personal firewall, device control, ...). ||
+| suite.epp.tests | Independent anti-malware tests ||
+| suite.epp.tests.windows.avtest.realworld | Based on latest Business Windows Client Windows 10 excel file, 3 means real-world 100% detection rate, at most 1 false positive, 2 means real-world above 99% detection rate at most 1 false positive, 1 means lesser results,0 not tested | https://www.av-test.org/en/press/test-results/ |
+| suite.epp.tests.windows.avcomparatives.realworld | Based on latest Real World Protection Test, 3 means 100% detection and less than 10% false positives, 2 means 99% detection and less than 10% false positives, 1 means lesser results, 0 means not tested | https://chart.av-comparatives.org/chart1.php |
+| suite.epp.tests.windows.avtest.files | Based on latest Business Windows Client Windows 10 excel file, 3 means samples 100% detection rate, at most 1 false positive during system scan, 2 means samples above 99% detection rate at most 1 false positive during system scan, 1 means lesser results,0 not tested | https://www.av-test.org/en/press/test-results/ |
+| suite.epp.tests.windows.avcomparatives.files | Based on latest File Detection Test, 3 means 100% detection, 2 means above 99% detection, 1 means lesser results, 0 means not tested | https://chart.av-comparatives.org/chart1.php |
+| suite.epp.tests.mac.avtest.files | Based on latest Home User MacOS excel file, 3 means 100% mac malware detection and 0 false positives, 2 means at most one mac malware detection miss and at most one false positives, 1 means lesser results, 0 not tested | https://www.av-test.org/en/press/test-results/|
+| suite.epp.tests.mac.avcomparatives.files| Based on latest MacOS PDF file, 3 means 100% mac malware detection, 2 means above 95% detection, 1 means lesser results, 0 not tested |  https://www.av-comparatives.org/mac-security-reviews/ |
 
-virustotal_malware - endpoint protection vendors registered with virustotal enjoy a stream of the latest malware.
-virustotal_unsafe_websites - endpoint protection vendors registered with virustotal enjoy a stream of the latest urls
+|suite.epp.features.mac.prevent | Prevents malware from ever running on the machine | vendor docs |
+|suite.epp.features.mac.prevent.firewall | Block network protocols, such as denying all incoming tcp connections | vendor docs |
+|suite.epp.features.mac.prevent.hips | Prevent remote malware from attacking legitimate processes through the network (port scanning, buffer overrun, DoS, etc..) | vendor docs |
+|suite.epp.features.mac.prevent.malicousurl | url blocking and malicous javascript detection | vendor docs|
+|suite.epp.features.mac.prevent.unauthorziedapps | white/black listing of applications | vendor docs|
+|suite.epp.features.mac.prevent.removeablemedia | Block bluetooth/usb/cd/etc...| vendor docs |
+|suite.epp.features.mac.prevent.executablefiles | Prevent malware from running | vendor docs |
+
+|suite.epp.features.mac.detect | Detect and react to malicous behavior of malware (that was not caught by the prevention modules)|| 
+|suite.epp.features.mac.detect.exploit | Detect attempt to exploit legitimate process vulnerability, such as in adobe/word | vendor docs|
+|suite.epp.features.mac.detect.ransomeware | Detect ransomeware behavior and rollback file encryption | vendor docs
+| suite.epp.virustotal.malware | anti-virus products that participate with virustotal enjoy a stream of the latest malware files| https://www.virustotal.com/en/about/credits/ |
+| suite.epp.virustotal.website | web0filtering products that participate with virustotal enjoy a stream of the latest rouge web urls | https://www.virustotal.com/en/about/credits/ |
+
