@@ -32,8 +32,8 @@ AND conditions followed by a list of requirements:
 `AND_NICE` - requirements that are nice to have, and moves the service slightly to the top of the results  
 `AND_EXCLUDE` - requirements that would exclude a service from the results  
 
-OR conditions followed by a list of requirements:
-`or` - requirements that are interchangeable
+OR conditions followed by a list of requirements:  
+`OR` - requirements that are interchangeable
 
 `./vendors.py filter -r requirements.yaml`
 
