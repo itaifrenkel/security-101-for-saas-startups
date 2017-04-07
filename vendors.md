@@ -113,10 +113,8 @@ The second requirement is for Windows Endpoint Protection Platform that passed a
 |suite.epp.features.mac.prevent.unauthorziedapps | white/black listing of applications | vendor docs|
 |suite.epp.features.mac.prevent.removeablemedia | Block bluetooth/usb/cd/etc...| vendor docs |
 |suite.epp.features.mac.prevent.executablefiles | Prevent malware from running | vendor docs |
-
 |**suite.epp.features.mac.detect** | Detect and react to malicous behavior of malware (that was not caught by the prevention modules)|| 
 |suite.epp.features.mac.detect.exploit | Detect attempt to exploit legitimate process vulnerability, such as in adobe/word | vendor docs|
 |suite.epp.features.mac.detect.ransomeware | Detect ransomeware behavior and rollback file encryption | vendor docs
 | suite.epp.virustotal.malware | anti-virus products that participate with virustotal enjoy a stream of the latest malware files| https://www.virustotal.com/en/about/credits/ |
-| suite.epp.virustotal.website | web0filtering products that participate with virustotal enjoy a stream of the latest rouge web urls | https://www.virustotal.com/en/about/credits/ |
-
+| suite.epp.virustotal.website | web filtering products that participate with virustotal enjoy a stream of the latest rouge web urls | https://www.virustotal.com/en/about/credits/ |
