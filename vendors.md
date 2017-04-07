@@ -42,7 +42,7 @@ OR conditions followed by a list of requirements:
 - iam:
     AND_MUST:
     - iam.features.sso
-    - iam.features.mfa.otp
+    - iam.features.mfa_otp
     - iam.features: 
         OR:
         - radius
@@ -50,12 +50,12 @@ OR conditions followed by a list of requirements:
     AND_WANT:
     - suite.security.soc2_type2
     AND_NICE:
-    - iam.features.mfa.yubikey
+    - iam.features.mfa_yubikey
 - epp:
     AND_MUST:
-    - epp.tests.windows.avtest.realworld: 3
+    - epp.tests.avtest.realworld.windows: 3
     AND_WANT:
-    - epp.tests.windows.avtest.files : 3
+    - epp.tests.avtest.files.windows : 3
     - suite.security.soc2_type2
     AND_EXCLUDE:
     - suite.name : 'terrible anti-virus'
@@ -65,6 +65,10 @@ The second requirement is for Windows Endpoint Protection Platform that passed a
 `
 
 ## Security Catalog criteria ##
+When defining requirements files, you would need to specify criteria.
+To reduce duplication we use the abbriviation `<os>` as a placeholder for: `mac` or `windows` or `android` or `ios`.
+
+
 | criteria | description |
 |----------|-------------|
 | **vendor** | General information about the company producting the security service |
@@ -107,21 +111,21 @@ The second requirement is for Windows Endpoint Protection Platform that passed a
 | epp.analysts.forrester | Latest coverage by Forrester analysts for the Endpoint Security Suites. 3 means leaders, 2 means strong performers, 1 means contenders, 0 not reviewed |
 |
 | **epp.tests** | Independent anti-malware tests |
-| epp.tests.windows.avtest.realworld | Based on latest Business Windows Client Windows 10 excel file, 3 means real-world 100% detection rate, at most 1 false positive, 2 means real-world above 99% detection rate at most 1 false positive, 1 means lesser results,0 not tested | https://www.av-test.org/en/press/test-results/ |
-| epp.tests.windows.avcomparatives.realworld | Based on latest Real World Protection Test, 3 means 100% detection and less than 10% false positives, 2 means 99% detection and less than 10% false positives, 1 means lesser results, 0 means not tested | https://chart.av-comparatives.org/chart1.php |
-| epp.tests.windows.avtest.files | Based on latest Business Windows Client Windows 10 excel file, 3 means samples 100% detection rate, at most 1 false positive during system scan, 2 means samples above 99% detection rate at most 1 false positive during system scan, 1 means lesser results,0 not tested | https://www.av-test.org/en/press/test-results/ |
-| epp.tests.windows.avcomparatives.files | Based on latest File Detection Test, 3 means 100% detection, 2 means above 99% detection, 1 means lesser results, 0 means not tested | https://chart.av-comparatives.org/chart1.php |
-| epp.tests.mac.avtest.files | Based on latest Home User MacOS excel file, 3 means 100% mac malware detection and 0 false positives, 2 means at most one mac malware detection miss and at most one false positives, 1 means lesser results, 0 not tested | https://www.av-test.org/en/press/test-results/ |
-| epp.tests.mac.avcomparatives.files| Based on latest MacOS PDF file, 3 means 100% mac malware detection, 2 means above 95% detection, 1 means lesser results, 0 not tested |  https://www.av-comparatives.org/mac-security-reviews/ |
-|**epp.features.mac.prevent** | Prevents malware from ever running on the machine |
-|epp.features.mac.prevent.firewall | Block network protocols, such as denying all incoming tcp connections | vendor docs |
-|epp.features.mac.prevent.hips | Prevent remote malware from attacking legitimate processes through the network (port scanning, buffer overrun, DoS, etc..) | vendor docs |
-|epp.features.mac.prevent.malicousurl | url blocking and malicous javascript detection | 
-|epp.features.mac.prevent.unauthorziedapps | white/black listing of applications | 
-|epp.features.mac.prevent.removeablemedia | Block bluetooth/usb/cd/etc...| vendor docs |
-|epp.features.mac.prevent.executablefiles | Prevent malware from running | vendor docs |
-|**epp.features.mac.detect** | Detect and react to malicous behavior of malware (that was not caught by the prevention modules)| 
-|epp.features.mac.detect.exploit | Detect attempt to exploit legitimate process vulnerability, such as in adobe/word | 
-|epp.features.mac.detect.ransomeware | Detect ransomeware behavior and rollback file encryption | vendor docs
+| epp.tests.avtest.realworld.windows | Based on latest Business Windows Client Windows 10 excel file, 3 means real-world 100% detection rate, at most 1 false positive, 2 means real-world above 99% detection rate at most 1 false positive, 1 means lesser results,0 not tested | https://www.av-test.org/en/press/test-results/ |
+| epp.tests.avcomparatives.realworld.windows | Based on latest Real World Protection Test, 3 means 100% detection and less than 10% false positives, 2 means 99% detection and less than 10% false positives, 1 means lesser results, 0 means not tested | https://chart.av-comparatives.org/chart1.php |
+| epp.tests.avtest.files.windows | Based on latest Business Windows Client Windows 10 excel file, 3 means samples 100% detection rate, at most 1 false positive during system scan, 2 means samples above 99% detection rate at most 1 false positive during system scan, 1 means lesser results,0 not tested | https://www.av-test.org/en/press/test-results/ |
+| epp.tests.avcomparatives.files.windows | Based on latest File Detection Test, 3 means 100% detection, 2 means above 99% detection, 1 means lesser results, 0 means not tested | https://chart.av-comparatives.org/chart1.php |
+| epp.tests.avtest.files.mac | Based on latest Home User MacOS excel file, 3 means 100% mac malware detection and 0 false positives, 2 means at most one mac malware detection miss and at most one false positives, 1 means lesser results, 0 not tested | https://www.av-test.org/en/press/test-results/ |
+| epp.tests.avcomparatives.files.mac | Based on latest MacOS PDF file, 3 means 100% mac malware detection, 2 means above 95% detection, 1 means lesser results, 0 not tested |  https://www.av-comparatives.org/mac-security-reviews/ |
+|**epp.features.prevent** | Prevents malware from ever running on the machine |
+|epp.features.prevent.firewall.<os> | Block network protocols, such as denying all incoming tcp connections | vendor docs |
+|epp.features.prevent.hips.<os> | Prevent remote malware from attacking legitimate processes through the network (port scanning, buffer overrun, DoS, etc..) | vendor docs |
+|epp.features.prevent.malicousurl.<os> | url blocking and malicous javascript detection | 
+|epp.features.prevent.unauthorziedapps.<os> | white/black listing of applications | 
+|epp.features.prevent.removeablemedia.<os> | Block bluetooth/usb/cd/etc...| vendor docs |
+|epp.features.prevent.executablefiles.<os> | Prevent malware from running | vendor docs |
+|**epp.features.detect** | Detect and react to malicous behavior of malware (that was not caught by the prevention modules)| 
+|epp.features.detect.exploit.<os> | Detect attempt to exploit legitimate process vulnerability, such as in adobe/word | 
+|epp.features.detect.ransomeware.<os> | Detect ransomeware behavior and rollback file encryption | vendor docs
 | epp.virustotal.malware | anti-virus products that participate with virustotal enjoy a stream of the latest malware files| https://www.virustotal.com/en/about/credits/ |
 | epp.virustotal.website | web filtering products that participate with virustotal enjoy a stream of the latest rouge web urls | https://www.virustotal.com/en/about/credits/ |
