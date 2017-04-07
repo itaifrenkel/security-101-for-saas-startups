@@ -73,7 +73,7 @@ The second requirement is for Windows Endpoint Protection Platform that passed a
 | **suite** | General information about the suite of tools that ussually have (or will have) a consolidated management console |
 | suite.name | The marketing name for the suite |
 | suite.landing_page | URL which provides more information about the product suite | vendor website|
-| suite.login_page | URL of the SaaS product suite |
+| suite.login_page | URL of the SaaS product customer login page|
 | suite.docs_page | URL of the SaaS technical documentation |
 | **suite.security** | Confidence that the SaaS you are using won't get compromized (avoid collateral damage) |
 | suite.security.soc2_type2 | True if the SaaS achieved SOC2 Type2 compliance|
