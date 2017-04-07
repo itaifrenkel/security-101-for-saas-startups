@@ -22,8 +22,8 @@ git clone forter/security-101-for-saas-startups
 We provide a sample of security requirements yaml files. These files are hierarchal.
 
 solution category:  
-```iam``` stands for identity and access management  
-```epp``` enterprise protection platform  
+```iam``` identity and access management  
+```epp``` endpoint protection platform  
 ```emm``` enterprise mobility management  
 
 AND conditions followed by a list of requirements:  
@@ -86,6 +86,8 @@ The second requirement is for Windows Endpoint Protection Platform that passed a
 | suite.security.bug_bounty | True if the SaaS has a public bug bounty program |
 | **iam** | Identity and Access Management features |
 | iam.products | List of marketing name of products that are part of the suite that implement Identity and Access Management |
+| iam.analysts.gartner | Latest coverage by Gartner analysts for the IAM product group. 3 means leaders, 2 means visionaries, 1 means niche players, 0 not reviewed |
+| iam.analysts.forrester | Latest coverage by Forrester analysts for the B2E Cloud IAM. 3 means leaders, 2 means strong performers, 1 means contenders, 0 not reviewed |
 | iam.features.users | Directory of users |
 | iam.features.roles | Role based policies (sometimes called groups) |
 | iam.features.devices | Directory of devices linked to the user |
@@ -99,7 +101,11 @@ The second requirement is for Windows Endpoint Protection Platform that passed a
 | iam.features.radius_gateway | Provides a self-hosted radius gateway that exposes the radius protocol |
 | iam.features.radius | Exposes radius protocol |
 | iam.features.ldap_sync | Provides a self-hosted synchornization tool between the hosted directory and ldap (active directory, AWS Simple AD, etc...) |
+| iam.features.sldap | Exposes secure ldap protocol | 
 | **epp** | Endpoint Protection Platform (antivirus, personal firewall, device control, ...). |
+| epp.analysts.gartner | Latest coverage by Gartner analysts for the Endpoint Protection Platforms product group. 3 means leaders, 2 means visionaries, 1 means niche players, 0 not reviewed |
+| epp.analysts.forrester | Latest coverage by Forrester analysts for the Endpoint Security Suites. 3 means leaders, 2 means strong performers, 1 means contenders, 0 not reviewed |
+|
 | **epp.tests** | Independent anti-malware tests |
 | epp.tests.windows.avtest.realworld | Based on latest Business Windows Client Windows 10 excel file, 3 means real-world 100% detection rate, at most 1 false positive, 2 means real-world above 99% detection rate at most 1 false positive, 1 means lesser results,0 not tested | https://www.av-test.org/en/press/test-results/ |
 | epp.tests.windows.avcomparatives.realworld | Based on latest Real World Protection Test, 3 means 100% detection and less than 10% false positives, 2 means 99% detection and less than 10% false positives, 1 means lesser results, 0 means not tested | https://chart.av-comparatives.org/chart1.php |
