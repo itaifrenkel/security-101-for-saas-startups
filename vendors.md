@@ -15,17 +15,30 @@ Startups find it hard to engage multiple security vendors. This vendor narrowing
 
 ## Prerequisites ##
 ```
-git clone forter/security-101
-docker run --name security-101 forter/security-101
+git clone forter/security-101-for-saas-startups
 ```
 
-## Basic Usage ##
-We provide a sample of security requirements yaml files that include "must", "want", "nice", "exclude" requirement levels. 
+## Usage ##
+We provide a sample of security requirements yaml files. These files are hierarchal.
 
-The first requirement is for an Identity and Access Management services that provides Single Sign-On with Multi-Factor Authentication and exposes radius API or provides a radius gateway. Services that achieved soc2 type2 certification, between them suites that support yubikey mfa will appear first.
-The second requirement is for Windows Endpoint Protection Platform that passed avtest real world tests. Suites that achieved top avtest file sample scores and achieved soc2 certification will appear on top. Finally it excludes the suite named "terrible anti-virus".
-```
+The first heirarchy is the solution type:
+`iam` - stands for identity and access management
+`epp` - enterprise protection platform
+`emm` - enterprise mobility management
 
+The second heirarchy are AND conditions 
+`and_must` - requirements that are mandatory for a service to be included in the results
+`and_want` - requirements that are expected, and moves the service to the top of the results
+`and_nice` - requirements that are nice to have, and moves the service slightly to the top of the results
+`and_exclude` - requirements that would exclude a service from the results
+
+The thrid heirarchy are or conditions 
+`or` - requirements that are interchangeable
+
+`./vendors.py filter -r requirements.yaml`
+
+# Example #
+``
 - iam:
     and_must:
     - suite.iam.features.sso
@@ -47,9 +60,9 @@ The second requirement is for Windows Endpoint Protection Platform that passed a
     and_exclude:
     - suite.name : 'terrible anti-virus'
 ```
-
-`./vendors.py filter -r requirements.yaml`
-
+The first requirement is for an Identity and Access Management services that provides Single Sign-On with Multi-Factor Authentication and exposes radius API or provides a radius gateway. Services that achieved soc2 type2 certification, between them suites that support yubikey mfa will appear first.
+The second requirement is for Windows Endpoint Protection Platform that passed avtest real world tests. Suites that achieved top avtest file sample scores and achieved soc2 certification will appear on top. Finally it excludes the suite named "terrible anti-virus".
+`
 
 ## Security Catalog criteria ##
 | criteria | description | evidence |
@@ -85,8 +98,8 @@ The second requirement is for Windows Endpoint Protection Platform that passed a
 | suite.iam.features.radius_gateway | Provides a self-hosted radius gateway that exposes the radius protocol |vendor docs|
 | suite.iam.features.radius | Exposes radius protocol |vendor docs|
 | suite.iam.features.ldap_sync | Provides a self-hosted synchornization tool between the hosted directory and ldap (active directory, AWS Simple AD, etc...) |vendor docs|
-| suite.epp | Endpoint Protection Platform (antivirus, personal firewall, device control, ...). ||
-| suite.epp.tests | Independent anti-malware tests ||
+| *suite.epp* | Endpoint Protection Platform (antivirus, personal firewall, device control, ...). ||
+| *suite.epp.tests* | Independent anti-malware tests ||
 | suite.epp.tests.windows.avtest.realworld | Based on latest Business Windows Client Windows 10 excel file, 3 means real-world 100% detection rate, at most 1 false positive, 2 means real-world above 99% detection rate at most 1 false positive, 1 means lesser results,0 not tested | https://www.av-test.org/en/press/test-results/ |
 | suite.epp.tests.windows.avcomparatives.realworld | Based on latest Real World Protection Test, 3 means 100% detection and less than 10% false positives, 2 means 99% detection and less than 10% false positives, 1 means lesser results, 0 means not tested | https://chart.av-comparatives.org/chart1.php |
 | suite.epp.tests.windows.avtest.files | Based on latest Business Windows Client Windows 10 excel file, 3 means samples 100% detection rate, at most 1 false positive during system scan, 2 means samples above 99% detection rate at most 1 false positive during system scan, 1 means lesser results,0 not tested | https://www.av-test.org/en/press/test-results/ |
@@ -94,7 +107,7 @@ The second requirement is for Windows Endpoint Protection Platform that passed a
 | suite.epp.tests.mac.avtest.files | Based on latest Home User MacOS excel file, 3 means 100% mac malware detection and 0 false positives, 2 means at most one mac malware detection miss and at most one false positives, 1 means lesser results, 0 not tested | https://www.av-test.org/en/press/test-results/|
 | suite.epp.tests.mac.avcomparatives.files| Based on latest MacOS PDF file, 3 means 100% mac malware detection, 2 means above 95% detection, 1 means lesser results, 0 not tested |  https://www.av-comparatives.org/mac-security-reviews/ |
 
-|suite.epp.features.mac.prevent | Prevents malware from ever running on the machine | vendor docs |
+|*suite.epp.features.mac.prevent* | Prevents malware from ever running on the machine ||
 |suite.epp.features.mac.prevent.firewall | Block network protocols, such as denying all incoming tcp connections | vendor docs |
 |suite.epp.features.mac.prevent.hips | Prevent remote malware from attacking legitimate processes through the network (port scanning, buffer overrun, DoS, etc..) | vendor docs |
 |suite.epp.features.mac.prevent.malicousurl | url blocking and malicous javascript detection | vendor docs|
@@ -102,7 +115,7 @@ The second requirement is for Windows Endpoint Protection Platform that passed a
 |suite.epp.features.mac.prevent.removeablemedia | Block bluetooth/usb/cd/etc...| vendor docs |
 |suite.epp.features.mac.prevent.executablefiles | Prevent malware from running | vendor docs |
 
-|suite.epp.features.mac.detect | Detect and react to malicous behavior of malware (that was not caught by the prevention modules)|| 
+|*suite.epp.features.mac.detect* | Detect and react to malicous behavior of malware (that was not caught by the prevention modules)|| 
 |suite.epp.features.mac.detect.exploit | Detect attempt to exploit legitimate process vulnerability, such as in adobe/word | vendor docs|
 |suite.epp.features.mac.detect.ransomeware | Detect ransomeware behavior and rollback file encryption | vendor docs
 | suite.epp.virustotal.malware | anti-virus products that participate with virustotal enjoy a stream of the latest malware files| https://www.virustotal.com/en/about/credits/ |
