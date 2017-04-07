@@ -67,54 +67,54 @@ The second requirement is for Windows Endpoint Protection Platform that passed a
 ## Security Catalog criteria ##
 | criteria | description | evidence |
 |----------|-------------|----------|
-| **vendor** | General information about the company producting the security service ||
-|vendor.name |  The official name of the company | vendor website |
-|vendor.headquarters | The country in which the company is listed. This is important when you want to exclude/include seucurity tools from countries that have specific regulations.| vendor website |
-| **suite** | General information about the suite of tools that ussually have (or will have) a consolidated management console ||
-| suite.name | The marketing name for the suite ||
+| **vendor** | General information about the company producting the security service |
+|vendor.name |  The official name of the company |
+|vendor.headquarters | The country in which the company is listed. This is important when you want to exclude/include seucurity tools from countries that have specific regulations.|
+| **suite** | General information about the suite of tools that ussually have (or will have) a consolidated management console |
+| suite.name | The marketing name for the suite |
 | suite.landing_page | URL which provides more information about the product suite | vendor website|
-| suite.login_page | URL of the SaaS product suite | vendor website |
+| suite.login_page | URL of the SaaS product suite |
 | **suite.security** | Confidence that the SaaS you are using won't get compromized (avoid collateral damage) |
-| suite.security.soc2_type2 | True if the SaaS achieved SOC2 Type2 compliance| vendor website |
-| suite.security.csa_star_level2 | True if the SaaS recieved CSA Star attestation| vendor website |
-| suite.security.iso_27001_2013 | True if the SaaS achieved ISO 27001 2013 certification| vendor website |
+| suite.security.soc2_type2 | True if the SaaS achieved SOC2 Type2 compliance|
+| suite.security.csa_star_level2 | True if the SaaS recieved CSA Star attestation|
+| suite.security.iso_27001_2013 | True if the SaaS achieved ISO 27001 2013 certification|
 | suite.security.iso_27018_2014 | True if the SaaS achieved ISO 27018 2014 certification| vendor website|
-| suite.security.hippa | True if the SaaS achieved HIPPA compliance| vendor website |
+| suite.security.hippa | True if the SaaS achieved HIPPA compliance|
 | suite.security.fedramp_ato | True if the SaaS achieved FedRAMP compliance and Auhtority to Operate| vendor website|
-| suite.security.pen_tests | True if the SaaS is continously going through penetration tests | vendor website |
-| suite.security.bug_bounty | True if the SaaS has a public bug bounty program | vendor website |
-| **suite.iam** | Identity and Access Management features ||
+| suite.security.pen_tests | True if the SaaS is continously going through penetration tests |
+| suite.security.bug_bounty | True if the SaaS has a public bug bounty program |
+| **suite.iam** | Identity and Access Management features |
 | suite.iam.products | List of marketing name of products that are part of the suite that implement Identity and Access Management |
-| suite.iam.features.users | Directory of users |vendor docs|
-| suite.iam.features.roles | Role based policies (sometimes called groups) |vendor docs|
-| suite.iam.features.devices | Directory of devices linked to the user |vendor docs|
+| suite.iam.features.users | Directory of users |
+| suite.iam.features.roles | Role based policies (sometimes called groups) |
+| suite.iam.features.devices | Directory of devices linked to the user |
 | suite.iam.features.sso | Single Sign-On App Catalog. Check that it includes all of the SaaS products you are using|vendor website|
-| suite.iam.features.lifecycle | Extends SSO by automatic provisioning and deprovisioning of users from 3rd party services and syncing with other directories |vendor docs|
-| suite.iam.features.saml | Exposes SAML Sign Sign-On API |vendor docs|
-| suite.iam.features.mfa_otp | Supports Multi Factor Authentication via Google Authenticator or similar One-Time-Password|vendor docs|
-| suite.iam.features.mfa_push | Supports Multi Factor Authentication via a mobile app with push notifications |vendor docs|
-| suite.iam.features.mfa_yubikey | Supports Multi Factor Authentication via YubiKey |vendor docs|
-| suite.iam.features.browser_plugin | Supports automatic login even to strange websites that require a browser plugin |vendor docs|
-| suite.iam.features.radius_gateway | Provides a self-hosted radius gateway that exposes the radius protocol |vendor docs|
-| suite.iam.features.radius | Exposes radius protocol |vendor docs|
-| suite.iam.features.ldap_sync | Provides a self-hosted synchornization tool between the hosted directory and ldap (active directory, AWS Simple AD, etc...) |vendor docs|
-| **suite.epp** | Endpoint Protection Platform (antivirus, personal firewall, device control, ...). ||
-| **suite.epp.tests** | Independent anti-malware tests ||
+| suite.iam.features.lifecycle | Extends SSO by automatic provisioning and deprovisioning of users from 3rd party services and syncing with other directories |
+| suite.iam.features.saml | Exposes SAML Sign Sign-On API |
+| suite.iam.features.mfa_otp | Supports Multi Factor Authentication via Google Authenticator or similar One-Time-Password|
+| suite.iam.features.mfa_push | Supports Multi Factor Authentication via a mobile app with push notifications |
+| suite.iam.features.mfa_yubikey | Supports Multi Factor Authentication via YubiKey |
+| suite.iam.features.browser_plugin | Supports automatic login even to strange websites that require a browser plugin |
+| suite.iam.features.radius_gateway | Provides a self-hosted radius gateway that exposes the radius protocol |
+| suite.iam.features.radius | Exposes radius protocol |
+| suite.iam.features.ldap_sync | Provides a self-hosted synchornization tool between the hosted directory and ldap (active directory, AWS Simple AD, etc...) |
+| **suite.epp** | Endpoint Protection Platform (antivirus, personal firewall, device control, ...). |
+| **suite.epp.tests** | Independent anti-malware tests |
 | suite.epp.tests.windows.avtest.realworld | Based on latest Business Windows Client Windows 10 excel file, 3 means real-world 100% detection rate, at most 1 false positive, 2 means real-world above 99% detection rate at most 1 false positive, 1 means lesser results,0 not tested | https://www.av-test.org/en/press/test-results/ |
 | suite.epp.tests.windows.avcomparatives.realworld | Based on latest Real World Protection Test, 3 means 100% detection and less than 10% false positives, 2 means 99% detection and less than 10% false positives, 1 means lesser results, 0 means not tested | https://chart.av-comparatives.org/chart1.php |
 | suite.epp.tests.windows.avtest.files | Based on latest Business Windows Client Windows 10 excel file, 3 means samples 100% detection rate, at most 1 false positive during system scan, 2 means samples above 99% detection rate at most 1 false positive during system scan, 1 means lesser results,0 not tested | https://www.av-test.org/en/press/test-results/ |
 | suite.epp.tests.windows.avcomparatives.files | Based on latest File Detection Test, 3 means 100% detection, 2 means above 99% detection, 1 means lesser results, 0 means not tested | https://chart.av-comparatives.org/chart1.php |
 | suite.epp.tests.mac.avtest.files | Based on latest Home User MacOS excel file, 3 means 100% mac malware detection and 0 false positives, 2 means at most one mac malware detection miss and at most one false positives, 1 means lesser results, 0 not tested | https://www.av-test.org/en/press/test-results/ |
 | suite.epp.tests.mac.avcomparatives.files| Based on latest MacOS PDF file, 3 means 100% mac malware detection, 2 means above 95% detection, 1 means lesser results, 0 not tested |  https://www.av-comparatives.org/mac-security-reviews/ |
-|**suite.epp.features.mac.prevent** | Prevents malware from ever running on the machine ||
+|**suite.epp.features.mac.prevent** | Prevents malware from ever running on the machine |
 |suite.epp.features.mac.prevent.firewall | Block network protocols, such as denying all incoming tcp connections | vendor docs |
 |suite.epp.features.mac.prevent.hips | Prevent remote malware from attacking legitimate processes through the network (port scanning, buffer overrun, DoS, etc..) | vendor docs |
-|suite.epp.features.mac.prevent.malicousurl | url blocking and malicous javascript detection | vendor docs|
-|suite.epp.features.mac.prevent.unauthorziedapps | white/black listing of applications | vendor docs|
+|suite.epp.features.mac.prevent.malicousurl | url blocking and malicous javascript detection | 
+|suite.epp.features.mac.prevent.unauthorziedapps | white/black listing of applications | 
 |suite.epp.features.mac.prevent.removeablemedia | Block bluetooth/usb/cd/etc...| vendor docs |
 |suite.epp.features.mac.prevent.executablefiles | Prevent malware from running | vendor docs |
-|**suite.epp.features.mac.detect** | Detect and react to malicous behavior of malware (that was not caught by the prevention modules)|| 
-|suite.epp.features.mac.detect.exploit | Detect attempt to exploit legitimate process vulnerability, such as in adobe/word | vendor docs|
+|**suite.epp.features.mac.detect** | Detect and react to malicous behavior of malware (that was not caught by the prevention modules)| 
+|suite.epp.features.mac.detect.exploit | Detect attempt to exploit legitimate process vulnerability, such as in adobe/word | 
 |suite.epp.features.mac.detect.ransomeware | Detect ransomeware behavior and rollback file encryption | vendor docs
 | suite.epp.virustotal.malware | anti-virus products that participate with virustotal enjoy a stream of the latest malware files| https://www.virustotal.com/en/about/credits/ |
 | suite.epp.virustotal.website | web filtering products that participate with virustotal enjoy a stream of the latest rouge web urls | https://www.virustotal.com/en/about/credits/ |
