@@ -65,8 +65,8 @@ The second requirement is for Windows Endpoint Protection Platform that passed a
 `
 
 ## Security Catalog criteria ##
-| criteria | description | evidence |
-|----------|-------------|----------|
+| criteria | description |
+|----------|-------------|
 | **vendor** | General information about the company producting the security service |
 |vendor.name |  The official name of the company |
 |vendor.headquarters | The country in which the company is listed. This is important when you want to exclude/include seucurity tools from countries that have specific regulations.|
