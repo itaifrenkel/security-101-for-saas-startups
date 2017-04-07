@@ -41,21 +41,21 @@ OR conditions followed by a list of requirements:
 ```
 - iam:
     AND_MUST:
-    - suite.iam.features.sso
-    - suite.iam.features.mfa.otp
-    - suite.iam.features: 
+    - iam.features.sso
+    - iam.features.mfa.otp
+    - iam.features: 
         OR:
         - radius
         - radius_gateway
     AND_WANT:
     - suite.security.soc2_type2
     AND_NICE:
-    - suite.iam.features.mfa.yubikey
+    - iam.features.mfa.yubikey
 - epp:
     AND_MUST:
-    - suite.epp.tests.windows.avtest.realworld: 3
+    - epp.tests.windows.avtest.realworld: 3
     AND_WANT:
-    - suite.epp.tests.windows.avtest.files : 3
+    - epp.tests.windows.avtest.files : 3
     - suite.security.soc2_type2
     AND_EXCLUDE:
     - suite.name : 'terrible anti-virus'
@@ -84,38 +84,38 @@ The second requirement is for Windows Endpoint Protection Platform that passed a
 | suite.security.fedramp_ato | True if the SaaS achieved FedRAMP compliance and Auhtority to Operate| vendor website|
 | suite.security.pen_tests | True if the SaaS is continously going through penetration tests |
 | suite.security.bug_bounty | True if the SaaS has a public bug bounty program |
-| **suite.iam** | Identity and Access Management features |
-| suite.iam.products | List of marketing name of products that are part of the suite that implement Identity and Access Management |
-| suite.iam.features.users | Directory of users |
-| suite.iam.features.roles | Role based policies (sometimes called groups) |
-| suite.iam.features.devices | Directory of devices linked to the user |
-| suite.iam.features.sso | Single Sign-On App Catalog. Check that it includes all of the SaaS products you are using|vendor website|
-| suite.iam.features.lifecycle | Extends SSO by automatic provisioning and deprovisioning of users from 3rd party services and syncing with other directories |
-| suite.iam.features.saml | Exposes SAML Sign Sign-On API |
-| suite.iam.features.mfa_otp | Supports Multi Factor Authentication via Google Authenticator or similar One-Time-Password|
-| suite.iam.features.mfa_push | Supports Multi Factor Authentication via a mobile app with push notifications |
-| suite.iam.features.mfa_yubikey | Supports Multi Factor Authentication via YubiKey |
-| suite.iam.features.browser_plugin | Supports automatic login even to strange websites that require a browser plugin |
-| suite.iam.features.radius_gateway | Provides a self-hosted radius gateway that exposes the radius protocol |
-| suite.iam.features.radius | Exposes radius protocol |
-| suite.iam.features.ldap_sync | Provides a self-hosted synchornization tool between the hosted directory and ldap (active directory, AWS Simple AD, etc...) |
-| **suite.epp** | Endpoint Protection Platform (antivirus, personal firewall, device control, ...). |
-| **suite.epp.tests** | Independent anti-malware tests |
-| suite.epp.tests.windows.avtest.realworld | Based on latest Business Windows Client Windows 10 excel file, 3 means real-world 100% detection rate, at most 1 false positive, 2 means real-world above 99% detection rate at most 1 false positive, 1 means lesser results,0 not tested | https://www.av-test.org/en/press/test-results/ |
-| suite.epp.tests.windows.avcomparatives.realworld | Based on latest Real World Protection Test, 3 means 100% detection and less than 10% false positives, 2 means 99% detection and less than 10% false positives, 1 means lesser results, 0 means not tested | https://chart.av-comparatives.org/chart1.php |
-| suite.epp.tests.windows.avtest.files | Based on latest Business Windows Client Windows 10 excel file, 3 means samples 100% detection rate, at most 1 false positive during system scan, 2 means samples above 99% detection rate at most 1 false positive during system scan, 1 means lesser results,0 not tested | https://www.av-test.org/en/press/test-results/ |
-| suite.epp.tests.windows.avcomparatives.files | Based on latest File Detection Test, 3 means 100% detection, 2 means above 99% detection, 1 means lesser results, 0 means not tested | https://chart.av-comparatives.org/chart1.php |
-| suite.epp.tests.mac.avtest.files | Based on latest Home User MacOS excel file, 3 means 100% mac malware detection and 0 false positives, 2 means at most one mac malware detection miss and at most one false positives, 1 means lesser results, 0 not tested | https://www.av-test.org/en/press/test-results/ |
-| suite.epp.tests.mac.avcomparatives.files| Based on latest MacOS PDF file, 3 means 100% mac malware detection, 2 means above 95% detection, 1 means lesser results, 0 not tested |  https://www.av-comparatives.org/mac-security-reviews/ |
-|**suite.epp.features.mac.prevent** | Prevents malware from ever running on the machine |
-|suite.epp.features.mac.prevent.firewall | Block network protocols, such as denying all incoming tcp connections | vendor docs |
-|suite.epp.features.mac.prevent.hips | Prevent remote malware from attacking legitimate processes through the network (port scanning, buffer overrun, DoS, etc..) | vendor docs |
-|suite.epp.features.mac.prevent.malicousurl | url blocking and malicous javascript detection | 
-|suite.epp.features.mac.prevent.unauthorziedapps | white/black listing of applications | 
-|suite.epp.features.mac.prevent.removeablemedia | Block bluetooth/usb/cd/etc...| vendor docs |
-|suite.epp.features.mac.prevent.executablefiles | Prevent malware from running | vendor docs |
-|**suite.epp.features.mac.detect** | Detect and react to malicous behavior of malware (that was not caught by the prevention modules)| 
-|suite.epp.features.mac.detect.exploit | Detect attempt to exploit legitimate process vulnerability, such as in adobe/word | 
-|suite.epp.features.mac.detect.ransomeware | Detect ransomeware behavior and rollback file encryption | vendor docs
-| suite.epp.virustotal.malware | anti-virus products that participate with virustotal enjoy a stream of the latest malware files| https://www.virustotal.com/en/about/credits/ |
-| suite.epp.virustotal.website | web filtering products that participate with virustotal enjoy a stream of the latest rouge web urls | https://www.virustotal.com/en/about/credits/ |
+| **iam** | Identity and Access Management features |
+| iam.products | List of marketing name of products that are part of the suite that implement Identity and Access Management |
+| iam.features.users | Directory of users |
+| iam.features.roles | Role based policies (sometimes called groups) |
+| iam.features.devices | Directory of devices linked to the user |
+| iam.features.sso | Single Sign-On App Catalog. Check that it includes all of the SaaS products you are using|vendor website|
+| iam.features.lifecycle | Extends SSO by automatic provisioning and deprovisioning of users from 3rd party services and syncing with other directories |
+| iam.features.saml | Exposes SAML Sign Sign-On API |
+| iam.features.mfa_otp | Supports Multi Factor Authentication via Google Authenticator or similar One-Time-Password|
+| iam.features.mfa_push | Supports Multi Factor Authentication via a mobile app with push notifications |
+| iam.features.mfa_yubikey | Supports Multi Factor Authentication via YubiKey |
+| iam.features.browser_plugin | Supports automatic login even to strange websites that require a browser plugin |
+| iam.features.radius_gateway | Provides a self-hosted radius gateway that exposes the radius protocol |
+| iam.features.radius | Exposes radius protocol |
+| iam.features.ldap_sync | Provides a self-hosted synchornization tool between the hosted directory and ldap (active directory, AWS Simple AD, etc...) |
+| **epp** | Endpoint Protection Platform (antivirus, personal firewall, device control, ...). |
+| **epp.tests** | Independent anti-malware tests |
+| epp.tests.windows.avtest.realworld | Based on latest Business Windows Client Windows 10 excel file, 3 means real-world 100% detection rate, at most 1 false positive, 2 means real-world above 99% detection rate at most 1 false positive, 1 means lesser results,0 not tested | https://www.av-test.org/en/press/test-results/ |
+| epp.tests.windows.avcomparatives.realworld | Based on latest Real World Protection Test, 3 means 100% detection and less than 10% false positives, 2 means 99% detection and less than 10% false positives, 1 means lesser results, 0 means not tested | https://chart.av-comparatives.org/chart1.php |
+| epp.tests.windows.avtest.files | Based on latest Business Windows Client Windows 10 excel file, 3 means samples 100% detection rate, at most 1 false positive during system scan, 2 means samples above 99% detection rate at most 1 false positive during system scan, 1 means lesser results,0 not tested | https://www.av-test.org/en/press/test-results/ |
+| epp.tests.windows.avcomparatives.files | Based on latest File Detection Test, 3 means 100% detection, 2 means above 99% detection, 1 means lesser results, 0 means not tested | https://chart.av-comparatives.org/chart1.php |
+| epp.tests.mac.avtest.files | Based on latest Home User MacOS excel file, 3 means 100% mac malware detection and 0 false positives, 2 means at most one mac malware detection miss and at most one false positives, 1 means lesser results, 0 not tested | https://www.av-test.org/en/press/test-results/ |
+| epp.tests.mac.avcomparatives.files| Based on latest MacOS PDF file, 3 means 100% mac malware detection, 2 means above 95% detection, 1 means lesser results, 0 not tested |  https://www.av-comparatives.org/mac-security-reviews/ |
+|**epp.features.mac.prevent** | Prevents malware from ever running on the machine |
+|epp.features.mac.prevent.firewall | Block network protocols, such as denying all incoming tcp connections | vendor docs |
+|epp.features.mac.prevent.hips | Prevent remote malware from attacking legitimate processes through the network (port scanning, buffer overrun, DoS, etc..) | vendor docs |
+|epp.features.mac.prevent.malicousurl | url blocking and malicous javascript detection | 
+|epp.features.mac.prevent.unauthorziedapps | white/black listing of applications | 
+|epp.features.mac.prevent.removeablemedia | Block bluetooth/usb/cd/etc...| vendor docs |
+|epp.features.mac.prevent.executablefiles | Prevent malware from running | vendor docs |
+|**epp.features.mac.detect** | Detect and react to malicous behavior of malware (that was not caught by the prevention modules)| 
+|epp.features.mac.detect.exploit | Detect attempt to exploit legitimate process vulnerability, such as in adobe/word | 
+|epp.features.mac.detect.ransomeware | Detect ransomeware behavior and rollback file encryption | vendor docs
+| epp.virustotal.malware | anti-virus products that participate with virustotal enjoy a stream of the latest malware files| https://www.virustotal.com/en/about/credits/ |
+| epp.virustotal.website | web filtering products that participate with virustotal enjoy a stream of the latest rouge web urls | https://www.virustotal.com/en/about/credits/ |
