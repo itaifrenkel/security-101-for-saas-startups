@@ -21,43 +21,43 @@ git clone forter/security-101-for-saas-startups
 ## Usage ##
 We provide a sample of security requirements yaml files. These files are hierarchal.
 
-The first heirarchy is the solution type:
-`iam` - stands for identity and access management
-`epp` - enterprise protection platform
-`emm` - enterprise mobility management
+solution category:  
+```iam``` stands for identity and access management  
+```epp``` enterprise protection platform  
+```emm``` enterprise mobility management  
 
-The second heirarchy are AND conditions 
-`and_must` - requirements that are mandatory for a service to be included in the results
-`and_want` - requirements that are expected, and moves the service to the top of the results
-`and_nice` - requirements that are nice to have, and moves the service slightly to the top of the results
-`and_exclude` - requirements that would exclude a service from the results
+AND conditions followed by a list of requirements:  
+`AND_MUST` - requirements that are mandatory for a service to be included in the results  
+`AND_WANT` - requirements that are expected, and moves the service to the top of the results  
+`AND_NICE` - requirements that are nice to have, and moves the service slightly to the top of the results  
+`AND_EXCLUDE` - requirements that would exclude a service from the results  
 
-The thrid heirarchy are or conditions 
+OR conditions followed by a list of requirements:
 `or` - requirements that are interchangeable
 
 `./vendors.py filter -r requirements.yaml`
 
 # Example #
-``
+```
 - iam:
-    and_must:
+    AND_MUST:
     - suite.iam.features.sso
     - suite.iam.features.mfa.otp
     - suite.iam.features: 
-        or:
+        OR:
         - radius
         - radius_gateway
-    and_want:
+    AND_WANT:
     - suite.security.soc2_type2
-    and_nice:
+    AND_NICE:
     - suite.iam.features.mfa.yubikey
 - epp:
-    and_must:
+    AND_MUST:
     - suite.epp.tests.windows.avtest.realworld: 3
-    and_want:
+    AND_WANT:
     - suite.epp.tests.windows.avtest.files : 3
     - suite.security.soc2_type2
-    and_exclude:
+    AND_EXCLUDE:
     - suite.name : 'terrible anti-virus'
 ```
 The first requirement is for an Identity and Access Management services that provides Single Sign-On with Multi-Factor Authentication and exposes radius API or provides a radius gateway. Services that achieved soc2 type2 certification, between them suites that support yubikey mfa will appear first.
@@ -67,14 +67,14 @@ The second requirement is for Windows Endpoint Protection Platform that passed a
 ## Security Catalog criteria ##
 | criteria | description | evidence |
 |----------|-------------|----------|
-| *vendor* | General information about the company producting the security service ||
+| **vendor** | General information about the company producting the security service ||
 |vendor.name |  The official name of the company | vendor website |
 |vendor.headquarters | The country in which the company is listed. This is important when you want to exclude/include seucurity tools from countries that have specific regulations.| vendor website |
-| *suite* | General information about the suite of tools that ussually have (or will have) a consolidated management console ||
+| **suite** | General information about the suite of tools that ussually have (or will have) a consolidated management console ||
 | suite.name | The marketing name for the suite ||
 | suite.landing_page | URL which provides more information about the product suite | vendor website|
 | suite.login_page | URL of the SaaS product suite | vendor website |
-| *suite.security* | Confidence that the SaaS you are using won't get compromized (avoid collateral damage) |
+| **suite.security** | Confidence that the SaaS you are using won't get compromized (avoid collateral damage) |
 | suite.security.soc2_type2 | True if the SaaS achieved SOC2 Type2 compliance| vendor website |
 | suite.security.csa_star_level2 | True if the SaaS recieved CSA Star attestation| vendor website |
 | suite.security.iso_27001_2013 | True if the SaaS achieved ISO 27001 2013 certification| vendor website |
@@ -83,7 +83,7 @@ The second requirement is for Windows Endpoint Protection Platform that passed a
 | suite.security.fedramp_ato | True if the SaaS achieved FedRAMP compliance and Auhtority to Operate| vendor website|
 | suite.security.pen_tests | True if the SaaS is continously going through penetration tests | vendor website |
 | suite.security.bug_bounty | True if the SaaS has a public bug bounty program | vendor website |
-| *suite.iam* | Identity and Access Management features ||
+| **suite.iam** | Identity and Access Management features ||
 | suite.iam.products | List of marketing name of products that are part of the suite that implement Identity and Access Management |
 | suite.iam.features.users | Directory of users |vendor docs|
 | suite.iam.features.roles | Role based policies (sometimes called groups) |vendor docs|
@@ -98,16 +98,15 @@ The second requirement is for Windows Endpoint Protection Platform that passed a
 | suite.iam.features.radius_gateway | Provides a self-hosted radius gateway that exposes the radius protocol |vendor docs|
 | suite.iam.features.radius | Exposes radius protocol |vendor docs|
 | suite.iam.features.ldap_sync | Provides a self-hosted synchornization tool between the hosted directory and ldap (active directory, AWS Simple AD, etc...) |vendor docs|
-| *suite.epp* | Endpoint Protection Platform (antivirus, personal firewall, device control, ...). ||
-| *suite.epp.tests* | Independent anti-malware tests ||
+| **suite.epp** | Endpoint Protection Platform (antivirus, personal firewall, device control, ...). ||
+| **suite.epp.tests** | Independent anti-malware tests ||
 | suite.epp.tests.windows.avtest.realworld | Based on latest Business Windows Client Windows 10 excel file, 3 means real-world 100% detection rate, at most 1 false positive, 2 means real-world above 99% detection rate at most 1 false positive, 1 means lesser results,0 not tested | https://www.av-test.org/en/press/test-results/ |
 | suite.epp.tests.windows.avcomparatives.realworld | Based on latest Real World Protection Test, 3 means 100% detection and less than 10% false positives, 2 means 99% detection and less than 10% false positives, 1 means lesser results, 0 means not tested | https://chart.av-comparatives.org/chart1.php |
 | suite.epp.tests.windows.avtest.files | Based on latest Business Windows Client Windows 10 excel file, 3 means samples 100% detection rate, at most 1 false positive during system scan, 2 means samples above 99% detection rate at most 1 false positive during system scan, 1 means lesser results,0 not tested | https://www.av-test.org/en/press/test-results/ |
 | suite.epp.tests.windows.avcomparatives.files | Based on latest File Detection Test, 3 means 100% detection, 2 means above 99% detection, 1 means lesser results, 0 means not tested | https://chart.av-comparatives.org/chart1.php |
-| suite.epp.tests.mac.avtest.files | Based on latest Home User MacOS excel file, 3 means 100% mac malware detection and 0 false positives, 2 means at most one mac malware detection miss and at most one false positives, 1 means lesser results, 0 not tested | https://www.av-test.org/en/press/test-results/|
+| suite.epp.tests.mac.avtest.files | Based on latest Home User MacOS excel file, 3 means 100% mac malware detection and 0 false positives, 2 means at most one mac malware detection miss and at most one false positives, 1 means lesser results, 0 not tested | https://www.av-test.org/en/press/test-results/ |
 | suite.epp.tests.mac.avcomparatives.files| Based on latest MacOS PDF file, 3 means 100% mac malware detection, 2 means above 95% detection, 1 means lesser results, 0 not tested |  https://www.av-comparatives.org/mac-security-reviews/ |
-
-|*suite.epp.features.mac.prevent* | Prevents malware from ever running on the machine ||
+|**suite.epp.features.mac.prevent** | Prevents malware from ever running on the machine ||
 |suite.epp.features.mac.prevent.firewall | Block network protocols, such as denying all incoming tcp connections | vendor docs |
 |suite.epp.features.mac.prevent.hips | Prevent remote malware from attacking legitimate processes through the network (port scanning, buffer overrun, DoS, etc..) | vendor docs |
 |suite.epp.features.mac.prevent.malicousurl | url blocking and malicous javascript detection | vendor docs|
@@ -115,7 +114,7 @@ The second requirement is for Windows Endpoint Protection Platform that passed a
 |suite.epp.features.mac.prevent.removeablemedia | Block bluetooth/usb/cd/etc...| vendor docs |
 |suite.epp.features.mac.prevent.executablefiles | Prevent malware from running | vendor docs |
 
-|*suite.epp.features.mac.detect* | Detect and react to malicous behavior of malware (that was not caught by the prevention modules)|| 
+|**suite.epp.features.mac.detect** | Detect and react to malicous behavior of malware (that was not caught by the prevention modules)|| 
 |suite.epp.features.mac.detect.exploit | Detect attempt to exploit legitimate process vulnerability, such as in adobe/word | vendor docs|
 |suite.epp.features.mac.detect.ransomeware | Detect ransomeware behavior and rollback file encryption | vendor docs
 | suite.epp.virustotal.malware | anti-virus products that participate with virustotal enjoy a stream of the latest malware files| https://www.virustotal.com/en/about/credits/ |
