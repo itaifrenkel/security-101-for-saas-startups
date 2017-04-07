@@ -33,7 +33,7 @@ AND conditions followed by a list of requirements:
 `AND_EXCLUDE` - requirements that would exclude a service from the results  
 
 OR conditions followed by a list of requirements:  
-`or` - requirements that are interchangeable
+`OR` - requirements that are interchangeable
 
 `./vendors.py filter -r requirements.yaml`
 
