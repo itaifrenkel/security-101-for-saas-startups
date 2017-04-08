@@ -87,7 +87,7 @@ To reduce duplication we use the abbriviation `<os>` as a placeholder for: `mac`
 | suite.security.hippa | True if the SaaS achieved HIPPA compliance|
 | suite.security.fedramp_ato | True if the SaaS achieved FedRAMP compliance and Auhtority to Operate| vendor website|
 | suite.security.pen_tests | True if the SaaS is continously going through penetration tests |
-| suite.security.bug_bounty | True if the SaaS has a public bug bounty program |
+| suite.security.bug_bounty | 3 public bug bounty with money rewards, 2 public bug bounty kudos or swag rewards, 1 private bug bounty, 0 no public bug bounty |
 | **iam** | Identity and Access Management features |
 | iam.products | List of marketing name of products that are part of the suite that implement Identity and Access Management |
 | iam.analysts.gartner | Latest coverage by Gartner analysts for the IAM product group. 3 means leaders, 2 means visionaries, 1 means niche players, 0 not reviewed |
